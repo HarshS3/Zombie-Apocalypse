@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #050505;
+  color: #e0e0e0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.neon-text-blue {
+  text-shadow: 0 0 10px #00f3ff;
+}
+
+.neon-text-red {
+  text-shadow: 0 0 10px #ff003c;
+}
+
+.neon-border-blue {
+  box-shadow: 0 0 10px #00f3ff;
+  border-color: #00f3ff;
+}
+
+.neon-border-red {
+  box-shadow: 0 0 10px #ff003c;
+  border-color: #ff003c;
+}
