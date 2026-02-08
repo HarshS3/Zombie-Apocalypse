@@ -29,18 +29,18 @@ const Round2Player = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black text-gray-100 pb-20">
+        <div className="min-h-screen bg-[#121010] text-white pb-20 font-sans">
              {/* Header */}
-             <div className="p-6 bg-gray-900 border-b border-gray-800 flex justify-between items-center sticky top-0 z-50">
+             <div className="p-6 bg-[#2c2c2c] border-b-4 border-black flex justify-between items-center sticky top-0 z-50">
                 <div>
-                     <h1 className="text-lg font-bold">Zone C Active</h1>
-                     <p className={`text-xs uppercase ${team === 'human' ? 'text-neonBlue' : 'text-neonRed'}`}>
+                     <h1 className="text-lg font-bold text-[#f0c330] uppercase text-shadow-[1px_1px_#3f2a00]">Chunk C Active</h1>
+                     <p className={`text-xs uppercase font-bold text-shadow-[1px_1px_#000] ${team === 'human' ? 'text-[#3C8DAB]' : 'text-[#ff3333]'}`}>
                         Team: {team}
                      </p>
                 </div>
-                <div className="flex items-center gap-2 bg-gray-800 px-3 py-1 rounded-full border border-gray-700">
-                    <Trophy className="w-4 h-4 text-yellow-400" />
-                    <span className="font-mono font-bold">{score}</span>
+                <div className="flex items-center gap-2 bg-[#373737] px-3 py-1 border-2 border-black">
+                    <Trophy className="w-4 h-4 text-[#f0c330]" strokeWidth={2.5} />
+                    <span className="font-mono font-bold text-white text-shadow-[1px_1px_#000]">{score}</span>
                 </div>
              </div>
 
@@ -50,38 +50,38 @@ const Round2Player = () => {
                  <div className="grid grid-cols-1 gap-4">
                      <button 
                         onClick={() => submitAnswer('easy')}
-                        className="h-24 rounded-xl bg-green-900/20 border-2 border-green-500/50 flex flex-col items-center justify-center active:scale-95 transition"
+                        className="h-24 bg-[#5b8731] border-b-4 border-black active:border-b-0 active:translate-y-1 flex flex-col items-center justify-center transition shadow-[2px_2px_0_#000]"
                     >
-                         <span className="text-xl font-bold text-green-400">EASY CODE</span>
-                         <span className="text-xs text-green-600">+10 Points</span>
+                         <span className="text-xl font-bold text-white text-shadow-[1px_1px_#2f4a1a]">WOODEN TASK</span>
+                         <span className="text-xs text-[#a4d476] font-bold">+10 XP</span>
                      </button>
                      
                      <button 
                          onClick={() => submitAnswer('medium')}
-                         className="h-24 rounded-xl bg-yellow-900/20 border-2 border-yellow-500/50 flex flex-col items-center justify-center active:scale-95 transition"
+                         className="h-24 bg-[#7d7d7d] border-b-4 border-black active:border-b-0 active:translate-y-1 flex flex-col items-center justify-center transition shadow-[2px_2px_0_#000]"
                     >
-                         <span className="text-xl font-bold text-yellow-400">MEDIUM LOGIC</span>
-                         <span className="text-xs text-yellow-600">+20 Points</span>
+                         <span className="text-xl font-bold text-white text-shadow-[1px_1px_#3f3f3f]">STONE TASK</span>
+                         <span className="text-xs text-[#dcdcdc] font-bold">+20 XP</span>
                      </button>
                      
                      <button 
                          onClick={() => submitAnswer('hard')}
-                         className="h-24 rounded-xl bg-red-900/20 border-2 border-red-500/50 flex flex-col items-center justify-center active:scale-95 transition"
+                         className="h-24 bg-[#3C8DAB] border-b-4 border-black active:border-b-0 active:translate-y-1 flex flex-col items-center justify-center transition shadow-[2px_2px_0_#000]"
                     >
-                         <span className="text-xl font-bold text-red-500">HARD ALGO</span>
-                         <span className="text-xs text-red-600">+30 Points</span>
+                         <span className="text-xl font-bold text-white text-shadow-[1px_1px_#204c5c]">DIAMOND TASK</span>
+                         <span className="text-xs text-[#b8e3f0] font-bold">+30 XP</span>
                      </button>
                  </div>
 
                  {/* Sabotage - Only shows if available */}
-                 <div className="mt-8 pt-8 border-t border-gray-800">
-                     <h3 className="text-gray-400 mb-4 text-sm uppercase center text-center">Tactical Options</h3>
+                 <div className="mt-8 pt-8 border-t-2 border-dashed border-[#555]">
+                     <h3 className="text-[#bfbfbf] mb-4 text-sm uppercase center text-center font-bold">Combat Options</h3>
                      <button 
                         onClick={requestSabotage}
-                        className="w-full py-4 bg-purple-900/30 border border-purple-500 text-purple-300 rounded-lg flex items-center justify-center gap-2 hover:bg-purple-900/50 transition"
+                        className="w-full py-4 bg-[#ff3333] border-b-4 border-black text-white font-bold flex items-center justify-center gap-2 hover:bg-[#b32424] transition shadow-[2px_2px_0_#000] active:translate-y-1 active:border-b-0"
                     >
-                         <Zap className="w-5 h-5" />
-                         INITIATE SABOTAGE
+                         <Zap className="w-5 h-5" strokeWidth={2.5} />
+                         IGNITE TNT
                      </button>
                  </div>
              </div>

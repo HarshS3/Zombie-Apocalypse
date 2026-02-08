@@ -27,14 +27,14 @@ const SoundControl = ({ className = '' }) => {
         <div className={`flex items-center gap-3 ${className}`}>
             <button
                 onClick={handleMuteToggle}
-                className={`p-2 rounded-lg transition ${
+                className={`p-2 border-2 border-black shadow-[2px_2px_0_#000] active:translate-y-1 active:shadow-none transition ${
                     muted 
-                        ? 'bg-gray-700 text-gray-400 hover:bg-gray-600' 
-                        : 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30'
+                        ? 'bg-[#7d7d7d] text-[#333] hover:bg-[#8b8b8b]' 
+                        : 'bg-[#f0c330] text-black hover:bg-[#ffe066]'
                 }`}
                 title={muted ? 'Unmute' : 'Mute'}
             >
-                {muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                {muted ? <VolumeX className="w-5 h-5" strokeWidth={2.5} /> : <Volume2 className="w-5 h-5" strokeWidth={2.5} />}
             </button>
             
             <div className="flex items-center gap-2">
@@ -45,7 +45,10 @@ const SoundControl = ({ className = '' }) => {
                     value={volume}
                     onChange={handleVolumeChange}
                     disabled={muted}
-                    className="w-24 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500 disabled:opacity-50"
+                    className="w-24 h-4 bg-[#373737] border-2 border-black appearance-none cursor-pointer accent-[#f0c330] disabled:opacity-50"
+                    style={{
+                        WebkitAppearance: 'none',
+                    }}
                     title="Volume"
                 />
                 <span className="text-xs text-gray-400 w-8">{volume}%</span>

@@ -82,28 +82,27 @@ const PlayerModal = ({ isOpen, onClose, team, zone, difficulty, players, onConfi
 
 // Score Cell Component
 const ScoreCell = ({ zone, difficulty, score, team, onIncrement, onDecrement }) => {
-  const teamColor = team === 'human' ? 'text-neonBlue' : 'text-neonRed';
-  const teamBorder = team === 'human' ? 'border-neonBlue/30' : 'border-neonRed/30';
+  const teamColor = team === 'human' ? 'text-[#3C8DAB]' : 'text-[#ff3333]';
 
   return (
-    <div className={`bg-black/40 border ${teamBorder} rounded-lg p-4 flex flex-col items-center justify-center gap-3`}>
-      <div className="text-xs text-gray-500 uppercase tracking-widest font-mono">
+    <div className={`bg-[#373737] border-2 border-black p-4 flex flex-col items-center justify-center gap-3 relative shadow-[2px_2px_0_#000]`}>
+      <div className="text-xs text-[#bfbfbf] uppercase tracking-widest font-bold">
         {zone} • {difficulty === 'E' ? 'Easy' : difficulty === 'M' ? 'Med' : 'Hard'}
       </div>
-      <div className={`text-4xl font-bold ${teamColor} font-mono`}>{score}</div>
+      <div className={`text-4xl font-bold ${teamColor} font-mono text-shadow-[2px_2px_#000]`}>{score}</div>
       <div className="flex gap-2">
         <button
           onClick={onDecrement}
-          className="w-10 h-10 border border-gray-700 rounded-lg hover:bg-gray-800 transition flex items-center justify-center"
+          className="w-10 h-10 border-2 border-black bg-[#8b8b8b] hover:bg-[#a0a0a0] transition flex items-center justify-center shadow-[1px_1px_0_#000] active:translate-y-1 active:shadow-none"
           disabled={score <= 0}
         >
-          <Minus className="w-4 h-4" />
+          <Minus className="w-4 h-4 text-black" strokeWidth={3} />
         </button>
         <button
           onClick={onIncrement}
-          className={`w-10 h-10 border ${teamBorder} ${team === 'human' ? 'hover:bg-neonBlue/10' : 'hover:bg-neonRed/10'} rounded-lg transition flex items-center justify-center`}
+          className={`w-10 h-10 border-2 border-black ${team === 'human' ? 'bg-[#3C8DAB] hover:bg-[#204c5c]' : 'bg-[#ff3333] hover:bg-[#b32424]'} transition flex items-center justify-center shadow-[1px_1px_0_#000] active:translate-y-1 active:shadow-none`}
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 text-white" strokeWidth={3} />
         </button>
       </div>
     </div>
@@ -430,58 +429,58 @@ const Round2Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white p-6">
+    <div className="min-h-screen bg-[#121010] text-white p-6 font-sans">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-end justify-between">
           <div>
-            <h1 className="text-4xl font-black tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-neonBlue to-neonRed">
-              War Room Control
+            <h1 className="text-4xl font-bold tracking-widest uppercase text-[#f0c330] text-shadow-[2px_2px_#3f2a00]">
+              OP Console - Round 2
             </h1>
-            <p className="text-gray-500 mt-2 font-mono text-sm">Round 2 • Admin Panel</p>
+            <p className="text-[#bfbfbf] mt-2 font-bold text-sm">Target: PVP Arena</p>
           </div>
           <div className="flex items-center gap-4">
             {/* Sound Control */}
             <SoundControl />
             
             {/* Timer Display */}
-            <div className="text-right px-6 py-2 bg-black/40 border border-gray-700 rounded-lg">
-              <div className={`text-3xl font-mono font-bold ${isTimerRunning ? 'text-green-400' : 'text-gray-400'}`}>
+            <div className="text-right px-6 py-2 bg-[#373737] border-2 border-black rounded-none shadow-[2px_2px_0_#000]">
+              <div className={`text-3xl font-mono font-bold ${isTimerRunning ? 'text-[#5b8731]' : 'text-[#8b8b8b]'} text-shadow-[1px_1px_#000]`}>
                 {formatTime(timeRemaining)}
               </div>
-              <div className="text-xs text-gray-500 uppercase tracking-wider">
-                {isTimerRunning ? 'Running' : 'Stopped'}
+              <div className="text-xs text-[#bfbfbf] uppercase tracking-wider font-bold">
+                {isTimerRunning ? 'Clock Running' : 'Clock Stopped'}
               </div>
             </div>
             
             <button 
               onClick={startRound2} 
               disabled={isTimerRunning}
-              className="px-6 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-bold transition uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-[#5b8731] border-b-4 border-black hover:border-b-2 active:border-b-0 active:translate-y-1 rounded-none font-bold transition uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed shadow-[2px_2px_0_#000] text-white"
             >
-              Start Round 2
+              Start Game
             </button>
             <button 
               onClick={resetRound2} 
-              className="px-6 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-bold transition uppercase tracking-wider"
+              className="px-6 py-2 bg-[#7d7d7d] border-b-4 border-black hover:border-b-2 active:border-b-0 active:translate-y-1 rounded-none font-bold transition uppercase tracking-wider shadow-[2px_2px_0_#000] text-white"
             >
-              Reset Timer
+              Reset Clock
             </button>
-            <button onClick={handleResetAllScores} className="px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg font-bold transition uppercase tracking-wider">
-              Reset All Scores
+            <button onClick={handleResetAllScores} className="px-6 py-2 bg-[#ff3333] border-b-4 border-black hover:border-b-2 active:border-b-0 active:translate-y-1 rounded-none font-bold transition uppercase tracking-wider shadow-[2px_2px_0_#000] text-white">
+              Wipe Data
             </button>
           </div>
         </div>
       </div>
       
       {/* Active Zone Control */}
-      <div className="mb-8 bg-gray-900/40 border border-yellow-400/30 rounded-xl p-6">
+      <div className="mb-8 mc-panel p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Crosshair className="w-6 h-6 text-yellow-400" />
+            <Crosshair className="w-6 h-6 text-[#f0c330]" strokeWidth={2.5} />
             <div>
-              <h2 className="text-xl font-black uppercase text-yellow-400">Active Zone</h2>
-              <p className="text-gray-500 text-sm">Selected zone receives 1.5x domination time</p>
+              <h2 className="text-xl font-bold uppercase text-[#f0c330] text-shadow-[1px_1px_#3f2a00]">Active Chunk Selection</h2>
+              <p className="text-[#bfbfbf] text-sm font-bold">Selected chunk yields 1.5x Capture Points</p>
             </div>
           </div>
           <div className="flex gap-3">
@@ -489,13 +488,13 @@ const Round2Admin = () => {
               <button
                 key={zone}
                 onClick={() => handleChangeActiveZone(zone)}
-                className={`px-8 py-3 rounded-lg font-bold text-lg transition uppercase tracking-wider ${
+                className={`px-8 py-3 font-bold text-lg transition uppercase tracking-wider border-2 border-black shadow-[4px_4px_0_#000] active:translate-y-1 active:shadow-none ${
                   activeZone === zone
-                    ? 'bg-yellow-400 text-black border-2 border-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.5)]'
-                    : 'bg-gray-800 text-gray-400 border-2 border-gray-700 hover:border-yellow-400/50'
+                    ? 'bg-[#f0c330] text-black'
+                    : 'bg-[#8b8b8b] text-[#333] hover:bg-[#a0a0a0]'
                 }`}
               >
-                Zone {zone}
+                Chunk {zone}
               </button>
             ))}
           </div>
@@ -505,16 +504,16 @@ const Round2Admin = () => {
       {/* Score Grid */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
         {/* HUMANS */}
-        <div className="bg-gray-900/40 border border-neonBlue/30 rounded-xl p-6">
+        <div className="bg-[#3C8DAB]/20 border-4 border-[#3C8DAB] p-6 shadow-[4px_4px_0_#000]">
           <div className="flex items-center gap-3 mb-6">
-            <Users className="w-6 h-6 text-neonBlue" />
-            <h2 className="text-2xl font-black uppercase text-neonBlue">Humans</h2>
+            <Users className="w-6 h-6 text-[#3C8DAB]" strokeWidth={2.5} />
+            <h2 className="text-2xl font-bold uppercase text-[#3C8DAB] text-shadow-[1px_1px_#000]">Humans</h2>
           </div>
           <div className="grid grid-cols-3 gap-4">
             {zones.map((zone) => (
               <div key={zone} className="space-y-4">
-                <div className="text-center text-lg font-bold text-gray-400 uppercase tracking-widest">
-                  Zone {zone}
+                <div className="text-center text-lg font-bold text-[#bfbfbf] uppercase tracking-widest text-shadow-[1px_1px_#000]">
+                  Chunk {zone}
                 </div>
                 {difficulties.map((diff) => (
                   <ScoreCell
@@ -533,16 +532,16 @@ const Round2Admin = () => {
         </div>
 
         {/* ZOMBIES */}
-        <div className="bg-gray-900/40 border border-neonRed/30 rounded-xl p-6">
+        <div className="bg-[#ff3333]/20 border-4 border-[#ff3333] p-6 shadow-[4px_4px_0_#000]">
           <div className="flex items-center gap-3 mb-6">
-            <Skull className="w-6 h-6 text-neonRed" />
-            <h2 className="text-2xl font-black uppercase text-neonRed">Zombies</h2>
+            <Skull className="w-6 h-6 text-[#ff3333]" strokeWidth={2.5} />
+            <h2 className="text-2xl font-bold uppercase text-[#ff3333] text-shadow-[1px_1px_#000]">Zombies</h2>
           </div>
           <div className="grid grid-cols-3 gap-4">
             {zones.map((zone) => (
               <div key={zone} className="space-y-4">
-                <div className="text-center text-lg font-bold text-gray-400 uppercase tracking-widest">
-                  Zone {zone}
+                <div className="text-center text-lg font-bold text-[#bfbfbf] uppercase tracking-widest text-shadow-[1px_1px_#000]">
+                  Chunk {zone}
                 </div>
                 {difficulties.map((diff) => (
                   <ScoreCell
@@ -562,25 +561,25 @@ const Round2Admin = () => {
       </div>
 
       {/* Sabotage Panel */}
-      <div className="bg-gray-900/40 border border-yellow-500/30 rounded-xl p-6">
+      <div className="mc-panel p-6 border-2 border-[#f0c330]">
         <div className="flex items-center gap-3 mb-6">
-          <Zap className="w-6 h-6 text-yellow-400" />
-          <h2 className="text-2xl font-black uppercase text-yellow-400">Sabotage Control</h2>
+          <Zap className="w-6 h-6 text-[#f0c330]" strokeWidth={2.5} />
+          <h2 className="text-2xl font-bold uppercase text-[#f0c330] text-shadow-[1px_1px_#3f2a00]">Creeper Trap Control</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <button
             onClick={() => handleSabotage('human')}
-            className="h-24 bg-neonBlue/10 border-2 border-neonBlue rounded-xl hover:bg-neonBlue/20 transition flex flex-col items-center justify-center gap-2 group"
+            className="h-24 bg-[#3C8DAB]/20 border-2 border-[#3C8DAB] hover:bg-[#3C8DAB]/40 transition flex flex-col items-center justify-center gap-2 group shadow-[4px_4px_0_rgba(60,141,171,0.5)] active:translate-y-1 active:shadow-none"
           >
-            <Users className="w-8 h-8 text-neonBlue group-hover:scale-110 transition" />
-            <span className="text-lg font-bold text-neonBlue uppercase tracking-wider">Trigger Human Sabotage</span>
+            <Users className="w-8 h-8 text-[#3C8DAB] group-hover:scale-110 transition" strokeWidth={2.5} />
+            <span className="text-lg font-bold text-[#3C8DAB] uppercase tracking-wider text-shadow-[1px_1px_#000]">Ignite Human Trap</span>
           </button>
           <button
             onClick={() => handleSabotage('zombie')}
-            className="h-24 bg-neonRed/10 border-2 border-neonRed rounded-xl hover:bg-neonRed/20 transition flex flex-col items-center justify-center gap-2 group"
+            className="h-24 bg-[#ff3333]/20 border-2 border-[#ff3333] hover:bg-[#ff3333]/40 transition flex flex-col items-center justify-center gap-2 group shadow-[4px_4px_0_rgba(255,51,51,0.5)] active:translate-y-1 active:shadow-none"
           >
-            <Skull className="w-8 h-8 text-neonRed group-hover:scale-110 transition" />
-            <span className="text-lg font-bold text-neonRed uppercase tracking-wider">Trigger Zombie Sabotage</span>
+            <Skull className="w-8 h-8 text-[#ff3333] group-hover:scale-110 transition" strokeWidth={2.5} />
+            <span className="text-lg font-bold text-[#ff3333] uppercase tracking-wider text-shadow-[1px_1px_#000]">Ignite Zombie Trap</span>
           </button>
         </div>
       </div>

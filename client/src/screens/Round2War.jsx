@@ -210,20 +210,19 @@ const Round2War = () => {
     };
 
     return (
-        <div className="h-screen w-full bg-black flex flex-col relative overflow-hidden">
+        <div className="h-screen w-full bg-[#121010] flex flex-col relative overflow-hidden">
              {/* Dynamic Background */}
             <div className={`absolute inset-0 transition-colors duration-1000 ${
-                activeZone && getZoneDominance(activeZone) === 'human' ? 'bg-blue-900/20' : 
-                activeZone && getZoneDominance(activeZone) === 'zombie' ? 'bg-red-900/20' : 'bg-gray-900/10'
+                activeZone && getZoneDominance(activeZone) === 'human' ? 'bg-[#3C8DAB]/10' : 
+                activeZone && getZoneDominance(activeZone) === 'zombie' ? 'bg-[#ff3333]/10' : 'bg-[#121010]'
             }`}></div>
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#111_1px,transparent_1px),linear-gradient(to_bottom,#111_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
-
+            
             {/* Top Bar - Active Zone Indicator */}
-            <header className="relative z-10 flex justify-between items-center p-6 bg-black/80 backdrop-blur border-b border-gray-800">
+            <header className="relative z-10 flex justify-between items-center p-6 bg-[#2c2c2c] border-b-4 border-b-black shadow-[0_4px_0_#000]">
                  <div>
-                    <h1 className="text-2xl font-black uppercase tracking-widest text-white mb-2">Round 2: Domination Protocol</h1>
+                    <h1 className="text-2xl font-bold uppercase tracking-widest text-[#f0c330] mb-2 text-shadow-[2px_2px_#3f2a00]">Round 2: PVP Arena</h1>
                     <div className="flex items-center gap-6">
-                        <span className="text-gray-400 text-sm uppercase tracking-widest">Active Zone:</span>
+                        <span className="text-[#bfbfbf] text-sm uppercase tracking-widest text-shadow-[1px_1px_#000]">Active Chunk:</span>
                         <div className="flex gap-3">
                             {['A', 'B', 'C'].map(zoneName => {
                                 const isActive = activeZone?.name === zoneName;
@@ -235,12 +234,12 @@ const Round2War = () => {
                                         animate={isActive ? { scale: [1, 1.05, 1] } : {}}
                                         transition={{ repeat: Infinity, duration: 2 }}
                                         className={`
-                                            w-16 h-16 flex items-center justify-center rounded-lg font-black text-2xl border-2 transition-all
+                                            w-16 h-16 flex items-center justify-center font-bold text-2xl border-4 transition-all
                                             ${isActive 
-                                                ? dominance === 'human' ? 'bg-neonBlue/20 border-neonBlue text-neonBlue shadow-[0_0_20px_rgba(0,243,255,0.4)]'
-                                                : dominance === 'zombie' ? 'bg-neonRed/20 border-neonRed text-neonRed shadow-[0_0_20px_rgba(255,0,60,0.4)]'
-                                                : 'bg-white/10 border-white text-white shadow-[0_0_20px_rgba(255,255,255,0.3)]'
-                                                : 'bg-gray-900/50 border-gray-700 text-gray-600'
+                                                ? dominance === 'human' ? 'bg-[#3C8DAB] border-black text-white text-shadow-[2px_2px_#204c5c]'
+                                                : dominance === 'zombie' ? 'bg-[#ff3333] border-black text-white text-shadow-[2px_2px_#3f0000]'
+                                                : 'bg-[#f0c330] border-black text-black'
+                                                : 'bg-[#8b8b8b] border-black text-[#555]'
                                             }
                                         `}
                                     >
@@ -254,10 +253,10 @@ const Round2War = () => {
                  <div className="text-right flex items-center gap-4">
                     <SoundControl />
                     <div>
-                        <div className="text-5xl font-mono font-bold text-white tracking-widest">
+                        <div className="text-5xl font-mono font-bold text-[#ff3333] tracking-widest text-shadow-[3px_3px_#3f0000]">
                             {formatTime(timeLeft)}
                         </div>
-                        <div className="text-xs text-gray-400 uppercase tracking-widest mt-1">Cycle Timer</div>
+                        <div className="text-xs text-[#bfbfbf] uppercase tracking-widest mt-1 text-shadow-[1px_1px_#000]">Redstone Clock</div>
                     </div>
                  </div>
             </header>
@@ -267,10 +266,10 @@ const Round2War = () => {
                 {/* Left Column: Zone Scores + Domination Time */}
                 <div className="col-span-4 space-y-6">
                     {/* Zone Scores */}
-                    <div className="bg-gray-900/60 border border-gray-800 rounded-xl p-6 backdrop-blur">
-                        <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                            <Crosshair className="w-5 h-5 text-yellow-400" />
-                            Zone Control Status
+                    <div className="mc-panel p-6">
+                        <h2 className="text-lg font-bold mb-4 flex items-center gap-2 text-[#3f3f3f]">
+                            <Crosshair className="w-5 h-5 text-[#f0c330]" />
+                            Chunk Control Status
                         </h2>
                         <div className="space-y-4">
                             {zones.map(zone => {
@@ -278,46 +277,46 @@ const Round2War = () => {
                                 const isActive = activeZone?._id === zone._id;
                                 return (
                                     <div key={`${zone._id}-${zone.humanScore}-${zone.zombieScore}-${zone.dominationStatus}`} className={`
-                                        p-4 rounded-lg border-2 transition-all
-                                        ${dominance === 'human' ? 'bg-neonBlue/10 border-neonBlue/50' : 
-                                          dominance === 'zombie' ? 'bg-neonRed/10 border-neonRed/50' : 
-                                          'bg-gray-800/40 border-gray-700'}
-                                        ${isActive ? 'ring-2 ring-yellow-400/50' : ''}
+                                        p-4 border-4 transition-all
+                                        ${dominance === 'human' ? 'bg-[#3C8DAB]/20 border-[#3C8DAB]' : 
+                                          dominance === 'zombie' ? 'bg-[#ff3333]/20 border-[#ff3333]' : 
+                                          'bg-[#8b8b8b] border-gray-600'}
+                                        ${isActive ? 'ring-4 ring-[#f0c330]' : ''}
                                     `}>
                                         <div className="flex items-center justify-between mb-3">
                                             <div className="flex items-center gap-2">
-                                                <span className="text-2xl font-black">ZONE {zone.name}</span>
-                                                {isActive && <span className="text-xs bg-yellow-400 text-black px-2 py-1 rounded font-bold">ACTIVE</span>}
+                                                <span className="text-2xl font-bold text-shadow-[1px_1px_#000] text-white">CHUNK {zone.name}</span>
+                                                {isActive && <span className="text-xs bg-[#f0c330] text-black px-2 py-1 border-2 border-black font-bold">ACTIVE</span>}
                                             </div>
-                                            <span className={`text-sm font-bold uppercase ${
-                                                dominance === 'human' ? 'text-neonBlue' :
-                                                dominance === 'zombie' ? 'text-neonRed' : 'text-gray-400'
+                                            <span className={`text-sm font-bold uppercase text-shadow-[1px_1px_#000] ${
+                                                dominance === 'human' ? 'text-[#3C8DAB]' :
+                                                dominance === 'zombie' ? 'text-[#ff3333]' : 'text-white'
                                             }`}>
                                                 {dominance === 'neutral' ? 'Contested' : dominance === 'human' ? 'Human Controlled' : 'Zombie Controlled'}
                                             </span>
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
-                                                <div className="text-xs text-gray-400 mb-1">HUMANS</div>
-                                                <div className="text-3xl font-bold text-neonBlue">{zone.humanScore || 0}</div>
+                                                <div className="text-xs text-[#bfbfbf] mb-1 font-bold">HUMANS</div>
+                                                <div className="text-3xl font-bold text-[#3C8DAB] text-shadow-[1px_1px_#000]">{zone.humanScore || 0}</div>
                                             </div>
                                             <div>
-                                                <div className="text-xs text-gray-400 mb-1">ZOMBIES</div>
-                                                <div className="text-3xl font-bold text-neonRed">{zone.zombieScore || 0}</div>
+                                                <div className="text-xs text-[#bfbfbf] mb-1 font-bold">ZOMBIES</div>
+                                                <div className="text-3xl font-bold text-[#ff3333] text-shadow-[1px_1px_#000]">{zone.zombieScore || 0}</div>
                                             </div>
                                         </div>
                                         
                                         {/* Current Domination Status */}
-                                        <div className="mt-3 pt-3 border-t border-gray-700">
-                                            <div className="text-xs text-gray-400 mb-1">Current Status:</div>
+                                        <div className="mt-3 pt-3 border-t-2 border-dashed border-gray-600">
+                                            <div className="text-xs text-[#bfbfbf] mb-1 font-bold">Current Status:</div>
                                             {dominance === 'neutral' ? (
-                                                <span className="text-sm text-gray-300 font-mono">Neutral - No domination</span>
+                                                <span className="text-sm text-white font-mono">Neutral - No domination</span>
                                             ) : (
                                                 <div className="flex items-center gap-2">
-                                                    <span className={`text-sm font-bold ${dominance === 'human' ? 'text-neonBlue' : 'text-neonRed'}`}>
+                                                    <span className={`text-sm font-bold ${dominance === 'human' ? 'text-[#3C8DAB]' : 'text-[#ff3333]'} text-shadow-[1px_1px_#000]`}>
                                                         {dominance === 'human' ? 'Humans' : 'Zombies'} dominating since: 
                                                     </span>
-                                                    <span className={`font-mono text-lg font-bold ${dominance === 'human' ? 'text-neonBlue' : 'text-neonRed'}`}>
+                                                    <span className={`font-mono text-lg font-bold ${dominance === 'human' ? 'text-[#3C8DAB]' : 'text-[#ff3333]'} text-shadow-[1px_1px_#000]`}>
                                                         {formatDominationTime(liveTimes[zone.name] || 0)}
                                                     </span>
                                                 </div>
@@ -330,27 +329,27 @@ const Round2War = () => {
                     </div>
 
                     {/* Zone Domination Time */}
-                    <div className="bg-gray-900/60 border border-gray-800 rounded-xl p-6 backdrop-blur">
-                        <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                            <Clock className="w-5 h-5 text-purple-400" />
-                            Total Domination Time (Per Zone)
+                    <div className="mc-panel p-6">
+                        <h2 className="text-lg font-bold mb-4 flex items-center gap-2 text-[#3f3f3f]">
+                            <Clock className="w-5 h-5 text-[#f0c330]" />
+                            Total Capture Time (Per Chunk)
                         </h2>
                         <div className="space-y-3">
                             {zones.map(zone => (
-                                <div key={`${zone._id}-dom-${zone.humanTotalDominationTime}-${zone.zombieTotalDominationTime}`} className="p-3 bg-black/40 rounded-lg border border-gray-800">
-                                    <div className="text-sm font-bold text-gray-300 mb-2">Zone {zone.name}</div>
+                                <div key={`${zone._id}-dom-${zone.humanTotalDominationTime}-${zone.zombieTotalDominationTime}`} className="p-3 bg-[#373737] border-2 border-black">
+                                    <div className="text-sm font-bold text-white mb-2 text-shadow-[1px_1px_#000]">Chunk {zone.name}</div>
                                     <div className="flex items-center justify-between text-xs">
                                         <div className="flex items-center gap-2">
-                                            <Users className="w-3 h-3 text-neonBlue" />
-                                            <span className="text-gray-400">Humans:</span>
-                                            <span className="font-mono text-neonBlue font-bold">
+                                            <Users className="w-3 h-3 text-[#3C8DAB]" />
+                                            <span className="text-[#bfbfbf]">Humans:</span>
+                                            <span className="font-mono text-[#3C8DAB] font-bold text-shadow-[1px_1px_#000]">
                                                 {formatDominationTime(zone.humanTotalDominationTime || 0)}
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Skull className="w-3 h-3 text-neonRed" />
-                                            <span className="text-gray-400">Zombies:</span>
-                                            <span className="font-mono text-neonRed font-bold">
+                                            <Skull className="w-3 h-3 text-[#ff3333]" />
+                                            <span className="text-[#bfbfbf]">Zombies:</span>
+                                            <span className="font-mono text-[#ff3333] font-bold text-shadow-[1px_1px_#000]">
                                                 {formatDominationTime(zone.zombieTotalDominationTime || 0)}
                                             </span>
                                         </div>
@@ -361,38 +360,38 @@ const Round2War = () => {
                     </div>
 
                     {/* Sabotage Status */}
-                    <div className="bg-gray-900/60 border border-gray-800 rounded-xl p-6 backdrop-blur">
-                        <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                            <Shield className="w-5 h-5 text-orange-400" />
-                            Sabotage Status (20min windows)
+                    <div className="mc-panel p-6">
+                        <h2 className="text-lg font-bold mb-4 flex items-center gap-2 text-[#3f3f3f]">
+                            <Shield className="w-5 h-5 text-[#ff3333]" />
+                            Creeper Trap Status (20min)
                         </h2>
                         <div className="space-y-4">
                             <div>
-                                <div className="text-sm text-gray-400 mb-2 flex items-center gap-2">
-                                    <Users className="w-4 h-4 text-neonBlue" />
+                                <div className="text-sm text-[#3f3f3f] mb-2 flex items-center gap-2 font-bold">
+                                    <Users className="w-4 h-4 text-[#3C8DAB]" />
                                     Humans
                                 </div>
                                 <div className="flex gap-2">
                                     {sabotageStatus.humans.map((used, i) => (
-                                        <div key={i} className={`flex-1 h-8 rounded border-2 flex items-center justify-center font-bold ${
-                                            used ? 'bg-green-900/30 border-green-500 text-green-400' : 'bg-gray-800/30 border-gray-700 text-gray-500'
+                                        <div key={i} className={`flex-1 h-8 border-2 border-black flex items-center justify-center font-bold ${
+                                            used ? 'bg-[#5b8731] text-white' : 'bg-[#8b8b8b] text-[#555]'
                                         }`}>
-                                            {used ? '✓' : '○'}
+                                            {used ? '✓' : ''}
                                         </div>
                                     ))}
                                 </div>
                             </div>
                             <div>
-                                <div className="text-sm text-gray-400 mb-2 flex items-center gap-2">
-                                    <Skull className="w-4 h-4 text-neonRed" />
+                                <div className="text-sm text-[#3f3f3f] mb-2 flex items-center gap-2 font-bold">
+                                    <Skull className="w-4 h-4 text-[#ff3333]" />
                                     Zombies
                                 </div>
                                 <div className="flex gap-2">
                                     {sabotageStatus.zombies.map((used, i) => (
-                                        <div key={i} className={`flex-1 h-8 rounded border-2 flex items-center justify-center font-bold ${
-                                            used ? 'bg-green-900/30 border-green-500 text-green-400' : 'bg-gray-800/30 border-gray-700 text-gray-500'
+                                        <div key={i} className={`flex-1 h-8 border-2 border-black flex items-center justify-center font-bold ${
+                                            used ? 'bg-[#5b8731] text-white' : 'bg-[#8b8b8b] text-[#555]'
                                         }`}>
-                                            {used ? '✓' : '○'}
+                                            {used ? '✓' : ''}
                                         </div>
                                     ))}
                                 </div>
@@ -405,13 +404,13 @@ const Round2War = () => {
                 <div className="col-span-8 space-y-6">
                     {/* Cumulative Domination Times */}
                     <div className="grid grid-cols-2 gap-6">
-                        <div className="bg-neonBlue/10 border-2 border-neonBlue rounded-xl p-6 backdrop-blur">
+                        <div className="bg-[#3C8DAB] border-4 border-black p-6 shadow-[4px_4px_0_#000]">
                             <div className="flex items-center gap-2 mb-2">
-                                <Users className="w-6 h-6 text-neonBlue" />
-                                <h3 className="text-xl font-bold text-neonBlue uppercase tracking-wider">Humans Total</h3>
+                                <Users className="w-6 h-6 text-white" strokeWidth={2.5} />
+                                <h3 className="text-xl font-bold text-white uppercase tracking-wider text-shadow-[2px_2px_#204c5c]">Humans Total</h3>
                             </div>
-                            <div className="text-sm text-gray-400 mb-3">Total Domination Time (All Zones)</div>
-                            <div className="text-5xl font-mono font-black text-neonBlue">
+                            <div className="text-sm text-white/80 mb-3 font-bold">Total Capture Time (All Chunks)</div>
+                            <div className="text-5xl font-mono font-bold text-white text-shadow-[3px_3px_#204c5c]">
                                 {formatDominationTime(
                                     zones.reduce((sum, z) => sum + (z.humanTotalDominationTime || 0) + 
                                         (z.dominationStatus === 'human' ? (liveTimes[z.name] || 0) : 0), 0)
@@ -419,13 +418,13 @@ const Round2War = () => {
                             </div>
                         </div>
                         
-                        <div className="bg-neonRed/10 border-2 border-neonRed rounded-xl p-6 backdrop-blur">
+                        <div className="bg-[#ff3333] border-4 border-black p-6 shadow-[4px_4px_0_#000]">
                             <div className="flex items-center gap-2 mb-2">
-                                <Skull className="w-6 h-6 text-neonRed" />
-                                <h3 className="text-xl font-bold text-neonRed uppercase tracking-wider">Zombies Total</h3>
+                                <Skull className="w-6 h-6 text-white" strokeWidth={2.5} />
+                                <h3 className="text-xl font-bold text-white uppercase tracking-wider text-shadow-[2px_2px_#3f0000]">Zombies Total</h3>
                             </div>
-                            <div className="text-sm text-gray-400 mb-3">Total Domination Time (All Zones)</div>
-                            <div className="text-5xl font-mono font-black text-neonRed">
+                            <div className="text-sm text-white/80 mb-3 font-bold">Total Capture Time (All Chunks)</div>
+                            <div className="text-5xl font-mono font-bold text-white text-shadow-[3px_3px_#3f0000]">
                                 {formatDominationTime(
                                     zones.reduce((sum, z) => sum + (z.zombieTotalDominationTime || 0) + 
                                         (z.dominationStatus === 'zombie' ? (liveTimes[z.name] || 0) : 0), 0)
@@ -437,53 +436,53 @@ const Round2War = () => {
                     {/* Player Leaderboards */}
                     <div className="grid grid-cols-2 gap-6">
                         {/* Humans Leaderboard */}
-                        <div className="bg-gray-900/60 border-2 border-neonBlue/30 rounded-xl p-6 backdrop-blur">
-                            <div className="flex items-center gap-3 mb-6">
-                            <Users className="w-8 h-8 text-neonBlue" />
-                            <h2 className="text-2xl font-black uppercase text-neonBlue">Humans</h2>
+                        <div className="mc-panel p-6">
+                            <div className="flex items-center gap-3 mb-6 border-b-2 border-gray-600 pb-2">
+                            <Users className="w-8 h-8 text-[#3C8DAB]" />
+                            <h2 className="text-2xl font-bold uppercase text-[#3f3f3f]">Humans</h2>
                         </div>
                         <div className="space-y-2">
                             {humanLeaderboard.length > 0 ? humanLeaderboard.map(player => (
-                                <div key={player.rank} className="flex items-center justify-between p-3 bg-black/40 rounded-lg border border-neonBlue/20">
+                                <div key={player.rank} className="flex items-center justify-between p-3 bg-[#c6c6c6] rounded-none border-2 border-black">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-8 h-8 rounded-full bg-neonBlue/20 border border-neonBlue flex items-center justify-center font-bold text-neonBlue">
+                                        <div className="w-8 h-8 bg-[#3C8DAB] border-2 border-black flex items-center justify-center font-bold text-white text-shadow-[1px_1px_#000]">
                                             {player.rank}
                                         </div>
-                                        <div className="font-mono text-white">{player.username}</div>
+                                        <div className="font-mono text-black font-bold">{player.username}</div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-2xl font-bold text-neonBlue">{player.score}</div>
-                                        <div className="text-xs text-gray-400">points</div>
+                                        <div className="text-2xl font-bold text-[#3C8DAB] text-shadow-[1px_1px_#000]">{player.score}</div>
+                                        <div className="text-xs text-[#555] font-bold">XP</div>
                                     </div>
                                 </div>
                             )) : (
-                                <div className="text-center text-gray-500 py-8">No players yet</div>
+                                <div className="text-center text-[#555] py-8 font-bold">No players connected...</div>
                             )}
                         </div>
                     </div>
 
                     {/* Zombies Leaderboard */}
-                    <div className="bg-gray-900/60 border-2 border-neonRed/30 rounded-xl p-6 backdrop-blur">
-                        <div className="flex items-center gap-3 mb-6">
-                            <Skull className="w-8 h-8 text-neonRed" />
-                            <h2 className="text-2xl font-black uppercase text-neonRed">Zombies</h2>
+                    <div className="mc-panel p-6">
+                        <div className="flex items-center gap-3 mb-6 border-b-2 border-gray-600 pb-2">
+                            <Skull className="w-8 h-8 text-[#ff3333]" />
+                            <h2 className="text-2xl font-bold uppercase text-[#3f3f3f]">Zombies</h2>
                         </div>
                         <div className="space-y-2">
                             {zombieLeaderboard.length > 0 ? zombieLeaderboard.map(player => (
-                                <div key={player.rank} className="flex items-center justify-between p-3 bg-black/40 rounded-lg border border-neonRed/20">
+                                <div key={player.rank} className="flex items-center justify-between p-3 bg-[#c6c6c6] rounded-none border-2 border-black">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-8 h-8 rounded-full bg-neonRed/20 border border-neonRed flex items-center justify-center font-bold text-neonRed">
+                                        <div className="w-8 h-8 bg-[#ff3333] border-2 border-black flex items-center justify-center font-bold text-white text-shadow-[1px_1px_#000]">
                                             {player.rank}
                                         </div>
-                                        <div className="font-mono text-white">{player.username}</div>
+                                        <div className="font-mono text-black font-bold">{player.username}</div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-2xl font-bold text-neonRed">{player.score}</div>
-                                        <div className="text-xs text-gray-400">points</div>
+                                        <div className="text-2xl font-bold text-[#ff3333] text-shadow-[1px_1px_#000]">{player.score}</div>
+                                        <div className="text-xs text-[#555] font-bold">XP</div>
                                     </div>
                                 </div>
                             )) : (
-                                <div className="text-center text-gray-500 py-8">No players yet</div>
+                                <div className="text-center text-[#555] py-8 font-bold">No players connected...</div>
                             )}
                         </div>
                     </div>
@@ -501,15 +500,15 @@ const Round2War = () => {
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        className={`bg-gray-900 border-4 ${sabotageModal.team === 'human' ? 'border-neonBlue shadow-[0_0_30px_rgba(0,243,255,0.5)]' : 'border-neonRed shadow-[0_0_30px_rgba(255,0,60,0.5)]'} rounded-xl p-8 max-w-md`}
+                        className={`bg-[#c6c6c6] border-4 border-black shadow-[8px_8px_0_#000] p-8 max-w-md text-center`}
                     >
                         <div className="flex flex-col items-center gap-4">
-                            <Zap className={`w-20 h-20 ${sabotageModal.team === 'human' ? 'text-neonBlue' : 'text-neonRed'} animate-pulse`} />
-                            <h2 className="text-4xl font-black uppercase text-yellow-400 tracking-wider">Sabotage Activated For:</h2>
-                            <p className={`text-2xl font-bold uppercase ${sabotageModal.team === 'human' ? 'text-neonBlue' : 'text-neonRed'}`}>
+                            <Zap className={`w-20 h-20 ${sabotageModal.team === 'human' ? 'text-[#3C8DAB]' : 'text-[#ff3333]'} animate-bounce`} strokeWidth={2.5} />
+                            <h2 className="text-4xl font-bold uppercase text-[#3f3f3f] tracking-wider text-shadow-[2px_2px_#bfbfbf]">TNT Ignited!</h2>
+                            <p className={`text-2xl font-bold uppercase ${sabotageModal.team === 'human' ? 'text-[#3C8DAB]' : 'text-[#ff3333]'} text-shadow-[1px_1px_#000]`}>
                                 {sabotageModal.team === 'human' ? 'HUMANS' : 'ZOMBIES'}
                             </p>
-                            <p className="text-white text-center text-lg font-semibold">2nd Rank Player Eliminated for 5 Minutes</p>
+                            <p className="text-[#3f3f3f] text-lg font-bold">2nd Rank Player Blown Up (5 Min Timeout)</p>
                         </div>
                     </motion.div>
                 </motion.div>

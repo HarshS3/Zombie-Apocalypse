@@ -1,20 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  background-color: #050505;
-  color: #e0e0e0;
-  font-family: 'Inter', sans-serif;
+  background-color: #121010; /* Dark Obsidian-ish */
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 0h8v8H8zM24 0h8v8h-8zM40 0h8v8h-8zM56 0h8v8h-8zM0 8h8v8H0zM16 8h8v8h-8zM32 8h8v8h-8zM48 8h8v8h-8zM8 16h8v8H8zM24 16h8v8h-8zM40 16h8v8h-8zM56 16h8v8h-8zM0 24h8v8H0zM16 24h8v8h-8zM32 24h8v8h-8zM48 24h8v8h-8zM8 32h8v8H8zM24 32h8v8h-8zM40 32h8v8h-8zM56 32h8v8h-8zM0 40h8v8H0zM16 40h8v8h-8zM32 40h8v8h-8zM48 40h8v8h-8zM8 48h8v8H8zM24 48h8v8h-8zM40 48h8v8h-8zM56 48h8v8h-8zM0 56h8v8H0zM16 56h8v8h-8zM32 56h8v8h-8zM48 56h8v8h-8z' fill='%231a1a1a' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  color: #dddddd;
+  font-family: 'VT323', monospace;
   overflow-x: hidden;
+  image-rendering: pixelated;
+}
+
+/* Minecraft UI Panel Style */
+.mc-panel {
+  background-color: #c6c6c6;
+  border: 4px solid #000;
+  border-left-color: #dbdbdb;
+  border-top-color: #dbdbdb;
+  border-right-color: #555555;
+  border-bottom-color: #555555;
+  box-shadow: inset 2px 2px 0px 0px #ffffff,
+              inset -2px -2px 0px 0px #373737;
+}
+
+.mc-btn {
+  background-color: #7d7d7d;
+  border: 2px solid #000;
+  border-left-color: #a4a4a4;
+  border-top-color: #a4a4a4;
+  border-right-color: #3b3b3b;
+  border-bottom-color: #3b3b3b;
+  color: #fff;
+  text-shadow: 2px 2px #000;
+  cursor: pointer;
+}
+
+.mc-btn:active {
+  border-left-color: #3b3b3b;
+  border-top-color: #3b3b3b;
+  border-right-color: #a4a4a4;
+  border-bottom-color: #a4a4a4;
+  background-color: #5b5b5b;
 }
 
 .neon-text-blue {
-  text-shadow: 0 0 10px #00f3ff;
+  color: #3C8DAB; /* Diamond Color */
+  text-shadow: 2px 2px #204c5c;
 }
 
 .neon-text-red {
-  text-shadow: 0 0 10px #ff003c;
+  color: #ff3333; /* Redstone Color */
+  text-shadow: 2px 2px #591111;
 }
 
 .neon-border-blue {

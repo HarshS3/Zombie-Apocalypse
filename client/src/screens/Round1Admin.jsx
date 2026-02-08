@@ -64,43 +64,43 @@ const Round1Admin = () => {
     };
 
     return (
-        <div className="min-h-screen bg-neutral-950 text-white p-8">
+        <div className="min-h-screen bg-[#121010] text-white p-8">
             <div className="flex items-center justify-between mb-6">
                 <div>
-                    <h1 className="text-3xl font-black tracking-widest uppercase">Round 1 Admin</h1>
-                    <p className="text-gray-400 mt-1">Managing: <span className="text-neonBlue font-bold">{lab?.name || `Lab ${labNum}`}</span></p>
+                    <h1 className="text-3xl font-bold tracking-widest uppercase text-[#3C8DAB] text-shadow-[2px_2px_#204c5c]">OP Console - Round 1</h1>
+                    <p className="text-[#bfbfbf] mt-1 font-bold text-shadow-[1px_1px_#000]">Server: <span className="text-[#f0c330] font-bold">Chunk {lab?.name || labNum}</span></p>
                 </div>
                 <div className="flex items-center gap-4">
-                    <button onClick={startTimer} className="px-6 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-bold transition uppercase tracking-wider">
+                    <button onClick={startTimer} className="px-6 py-2 bg-[#5b8731] border-b-4 border-black hover:border-b-2 active:border-b-0 active:translate-y-1 font-bold transition uppercase tracking-wider text-white shadow-[2px_2px_0_#000]">
                         Start Timer
                     </button>
-                    <button onClick={resetTimer} className="px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg font-bold transition uppercase tracking-wider">
+                    <button onClick={resetTimer} className="px-6 py-2 bg-[#ff3333] border-b-4 border-black hover:border-b-2 active:border-b-0 active:translate-y-1 font-bold transition uppercase tracking-wider text-white shadow-[2px_2px_0_#000]">
                         Reset Timer
                     </button>
                 </div>
             </div>
             <div className="mb-4">
-                <div className="flex items-center gap-2 text-yellow-200 bg-yellow-900/20 border border-yellow-500/30 px-4 py-2 rounded inline-flex">
+                <div className="flex items-center gap-2 text-[#f0c330] bg-[#3f2a00] border-2 border-[#f0c330] px-4 py-2 font-bold inline-flex">
                     <ShieldAlert className="w-5 h-5" />
-                    <span className="text-sm">Per-lab control: PC A/B/C/D + lock</span>
+                    <span className="text-sm">Admin Access Level: 4 (Creative Mode)</span>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-8">
                 {/* Left: PC controls */}
-                <div className="bg-gray-900/40 border border-gray-800 rounded-xl p-6">
-                    <h2 className="text-lg font-bold mb-4">PC Control Grid (10 PCs)</h2>
+                <div className="mc-panel p-6">
+                    <h2 className="text-lg font-bold mb-4 text-[#3f3f3f] uppercase border-b-2 border-[#555] pb-2">Command Blocks Grid (10 PCs)</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {pcs.map((pc) => (
-                            <div key={pc._id} className="bg-black/40 border border-gray-800 rounded-lg p-4">
+                            <div key={pc._id} className="bg-[#373737] border-2 border-black p-4 relative">
                                 <div className="flex items-center justify-between mb-3">
-                                    <div className="font-mono text-gray-300">PC-{String(pc.pcNumber).padStart(2, '0')}</div>
+                                    <div className="font-mono text-[#3C8DAB] font-bold text-shadow-[1px_1px_#000]">CMD-{String(pc.pcNumber).padStart(2, '0')}</div>
                                     <button
                                         onClick={() => toggleLock(pc)}
-                                        className={`px-2 py-1 rounded border text-xs flex items-center gap-1 ${pc.status === 'locked' ? 'border-red-600/60 text-red-200 bg-red-900/20' : 'border-gray-700 text-gray-200 bg-gray-800/40'}`}
+                                        className={`px-2 py-1 border-2 font-black text-xs flex items-center gap-1 ${pc.status === 'locked' ? 'border-[#ff3333] text-[#ff3333] bg-[#3f0000]' : 'border-[#5b8731] text-[#5b8731] bg-[#1a2e05]'}`}
                                     >
-                                        {pc.status === 'locked' ? <Lock className="w-4 h-4" /> : <Unlock className="w-4 h-4" />}
-                                        {pc.status === 'locked' ? 'Locked' : 'Unlocked'}
+                                        {pc.status === 'locked' ? <Lock className="w-4 h-4" strokeWidth={2.5} /> : <Unlock className="w-4 h-4" strokeWidth={2.5} />}
+                                        {pc.status === 'locked' ? 'LOCKED' : 'OPEN'}
                                     </button>
                                 </div>
 
@@ -112,10 +112,10 @@ const Round1Admin = () => {
                                                 key={k}
                                                 disabled={pc.status === 'locked'}
                                                 onClick={() => setStep(pc._id, k, !isOn)}
-                                                className={`h-10 rounded font-bold uppercase border transition active:scale-95 disabled:opacity-40 ${
+                                                className={`h-10 font-bold uppercase border-2 transition active:scale-95 disabled:opacity-40 shadow-[2px_2px_0_#000] ${
                                                     isOn
-                                                        ? 'bg-neonBlue/20 border-neonBlue text-neonBlue'
-                                                        : 'bg-gray-900/30 border-gray-700 text-gray-300 hover:border-gray-500'
+                                                        ? 'bg-[#3C8DAB] border-black text-white'
+                                                        : 'bg-[#8b8b8b] border-[#555] text-[#3f3f3f] hover:bg-[#a0a0a0]'
                                                 }`}
                                             >
                                                 {k}
@@ -124,9 +124,9 @@ const Round1Admin = () => {
                                     })}
                                 </div>
 
-                                <div className="mt-3 text-xs text-gray-400 flex justify-between">
-                                    <span>Progress: <span className="font-mono text-white">{pc.progress}/4</span></span>
-                                    <span className={`${pc.status === 'solved' ? 'text-green-300' : pc.status === 'locked' ? 'text-red-300' : 'text-gray-300'}`}>{pc.status}</span>
+                                <div className="mt-3 text-xs text-[#bfbfbf] flex justify-between font-bold">
+                                    <span>XP: <span className="font-mono text-white">{pc.progress}/4</span></span>
+                                    <span className={`uppercase font-black ${pc.status === 'solved' ? 'text-[#5b8731]' : pc.status === 'locked' ? 'text-[#ff3333]' : 'text-[#f0c330]'}`}>{pc.status}</span>
                                 </div>
                             </div>
                         ))}
@@ -134,33 +134,33 @@ const Round1Admin = () => {
                 </div>
 
                 {/* Right: Leaderboard */}
-                <div className="bg-gray-900/40 border border-gray-800 rounded-xl p-6">
-                    <h2 className="text-lg font-bold mb-4">Live Leaderboard (8 Labs)</h2>
+                <div className="mc-panel p-6">
+                    <h2 className="text-lg font-bold mb-4 text-[#3f3f3f] uppercase border-b-2 border-[#555] pb-2">Server Rankings (8 Chunks)</h2>
                     <div className="space-y-2">
                         {sortedLeaderboard.map((row, idx) => (
                             <div
                                 key={row.labNumber}
-                                className={`flex items-center justify-between p-3 rounded border ${
-                                    row.labNumber === labNum ? 'border-neonBlue/60 bg-neonBlue/10' : 'border-gray-800 bg-black/30'
+                                className={`flex items-center justify-between p-3 border-2 border-black ${
+                                    row.labNumber === labNum ? 'bg-[#3C8DAB] text-white' : 'bg-[#c6c6c6] text-black'
                                 }`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="w-8 text-center font-mono text-gray-400">#{idx + 1}</div>
+                                    <div className="w-8 text-center font-mono font-bold">#{idx + 1}</div>
                                     <div>
-                                        <div className="font-semibold">Lab {row.labNumber}</div>
-                                        <div className="text-xs text-gray-500">Solved PCs: {row.totalSolvedPCs}/10</div>
+                                        <div className="font-bold uppercase">Chunk {row.labNumber}</div>
+                                        <div className="text-xs font-bold opacity-75">Unlocked: {row.totalSolvedPCs}/10</div>
                                     </div>
                                 </div>
                                 <div className="text-right">
-                                    <div className="font-mono text-white">{row.totalProgress}/40</div>
-                                    <div className={`text-xs uppercase ${row.infectionLevel === 'critical' ? 'text-red-300' : row.infectionLevel === 'medium' ? 'text-yellow-300' : 'text-green-300'}`}
+                                    <div className="font-mono font-bold text-lg">{row.totalProgress}/40</div>
+                                    <div className={`text-xs font-black uppercase ${row.infectionLevel === 'critical' ? 'text-[#ff3333]' : row.infectionLevel === 'medium' ? 'text-[#f0c330]' : 'text-[#5b8731]'}`}
                                         >{row.infectionLevel}
                                     </div>
                                 </div>
                             </div>
                         ))}
                         {sortedLeaderboard.length === 0 && (
-                            <div className="text-gray-500 text-sm">No leaderboard yet. Trigger `/api/seed` and refresh.</div>
+                            <div className="text-[#555] font-bold text-sm">No players connected...</div>
                         )}
                     </div>
                 </div>

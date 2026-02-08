@@ -69,60 +69,56 @@ const Round1Lab = () => {
   const seconds = timeLeft % 60;
 
   return (
-    <div className="min-h-screen bg-black text-white p-8 relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none"></div>
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-neonBlue to-neonRed"></div>
-
+    <div className="min-h-screen text-white p-8 relative overflow-hidden">
         {/* Header */}
         <div className="flex justify-between items-center mb-12 relative z-10">
             <div>
-                <h1 className="text-4xl font-bold tracking-widest uppercase text-neonBlue flex items-center gap-3">
-                    <Terminal className="w-10 h-10" />
-                    Lab Breach Protocol
+                <h1 className="text-4xl font-bold tracking-widest uppercase text-[#3C8DAB] text-shadow-[3px_3px_#204c5c] flex items-center gap-3">
+                    <Terminal className="w-10 h-10" strokeWidth={2.5} />
+                    Server Protocol
                 </h1>
-                <h2 className="text-2xl text-gray-400 mt-2">Sector: {labData?.name || `Lab ${labId}`}</h2>
+                <h2 className="text-2xl text-[#bfbfbf] mt-2 text-shadow-[2px_2px_#000]">Chunk: {labData?.name || `Lab ${labId}`}</h2>
             </div>
             <div className="text-right">
-                <div className="text-6xl font-mono font-bold text-red-500 tracking-tighter shadow-red-500/50 drop-shadow-lg">
+                <div className="text-6xl font-mono font-bold text-[#ff3333] tracking-tighter text-shadow-[4px_4px_#3f0000]">
                     {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
                 </div>
-                <div className="text-sm text-red-400 uppercase tracking-widest mt-1 animate-pulse">
-                    Virus Breach Imminent
+                <div className="text-sm text-[#ff3333] uppercase tracking-widest mt-1 animate-pulse text-shadow-[1px_1px_#000]">
+                    Server Shutdown Imminent
                 </div>
             </div>
         </div>
 
         {/* Status Indicators */}
         <div className="grid grid-cols-3 gap-6 mb-12">
-            <div className="bg-gray-900/80 border border-gray-700 p-6 rounded-lg backdrop-blur-sm">
-                <h3 className="text-gray-400 text-sm uppercase mb-2">Virus Integrity</h3>
-                <div className="flex items-center gap-4 text-green-400">
-                    <Biohazard className="w-8 h-8" />
-                    <span className="text-2xl font-bold">STABLE</span>
+            <div className="mc-panel p-6">
+                <h3 className="text-[#3f3f3f] text-lg font-bold uppercase mb-2">Server Integrity</h3>
+                <div className="flex items-center gap-4 text-[#5b8731]">
+                    <Biohazard className="w-8 h-8" strokeWidth={2.5} />
+                    <span className="text-3xl font-bold text-shadow-[2px_2px_#2f4a1a]">STABLE</span>
                 </div>
-                <div className="w-full bg-gray-800 h-2 mt-4 rounded-full overflow-hidden">
-                    <div className="bg-green-500 h-full w-[80%]"></div>
+                <div className="w-full bg-[#373737] h-4 mt-4 border-2 border-black">
+                    <div className="bg-[#5b8731] h-full w-[80%] border-r-2 border-[#8cc44e]"></div>
                 </div>
             </div>
             
-            <div className="bg-gray-900/80 border border-t border-neonBlue p-6 rounded-lg backdrop-blur-sm">
-                <h3 className="text-gray-400 text-sm uppercase mb-2">Decryption Progress</h3>
-                <div className="text-4xl font-bold text-white">
+            <div className="mc-panel p-6">
+                <h3 className="text-[#3f3f3f] text-lg font-bold uppercase mb-2">Decryption Progress</h3>
+                <div className="text-4xl font-bold text-[#3C8DAB] text-shadow-[2px_2px_#204c5c]">
                     {displayPcs.filter(p => p.status === 'solved').length} / 10
                 </div>
             </div>
 
-             <div className="bg-gray-900/80 border border-t border-neonRed p-6 rounded-lg backdrop-blur-sm">
-                <h3 className="text-gray-400 text-sm uppercase mb-2">Escape Code</h3>
+             <div className="mc-panel p-6">
+                <h3 className="text-[#3f3f3f] text-lg font-bold uppercase mb-2">Admin Code</h3>
                 <div className="flex gap-2">
                     {displayPcs.filter(p => p.status === 'solved').map((p, i) => (
-                        <div key={i} className="w-8 h-10 border border-neonBlue/50 flex items-center justify-center font-mono text-xl bg-neonBlue/10">
+                        <div key={i} className="w-10 h-12 border-2 border-black flex items-center justify-center font-mono text-xl bg-[#3C8DAB] text-white text-shadow-[1px_1px_#000]">
                             {p.assignedAlphabet}
                         </div>
                     ))}
                     {Array(10 - displayPcs.filter(p => p.status === 'solved').length).fill(0).map((_, i) => (
-                         <div key={i} className="w-8 h-10 border border-gray-700 flex items-center justify-center font-mono text-xl text-gray-600">
+                         <div key={i} className="w-10 h-12 border-2 border-[#555] flex items-center justify-center font-mono text-xl text-[#555] bg-[#8b8b8b]">
                             ?
                         </div>
                     ))}
@@ -140,39 +136,41 @@ const Round1Lab = () => {
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             className={`
-                                                    relative p-6 rounded-xl border-2 transition-all duration-300
+                                                    relative p-6 border-4 transition-all duration-300 mc-panel
                                                     ${pc.status === 'solved' 
-                                                            ? 'bg-green-900/20 border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.3)]' 
+                                                            ? 'bg-[#5b8731] border-black scale-105' 
                                                             : pc.status === 'locked'
-                                                                ? 'bg-red-900/10 border-red-800/60'
-                                                                : 'bg-gray-900/50 border-gray-800'
+                                                                ? 'bg-[#3f0000] border-[#ff3333]'
+                                                                : 'bg-[#c6c6c6] border-black'
                                                     }
                                             `}
                                     >
                                             <div className="flex justify-between items-start mb-4">
-                                                    <span className="font-mono text-lg text-gray-400">PC-{String(pc.pcNumber).padStart(2, '0')}</span>
+                                                    <span className={`font-mono text-xl ${pc.status === 'solved' ? 'text-white text-shadow-[1px_1px_#000]' : 'text-[#3f3f3f]'}`}>
+                                                        Computer-{String(pc.pcNumber).padStart(2, '0')}
+                                                    </span>
                                                     {pc.status === 'solved'
-                                                        ? <Unlock className="text-green-500" />
-                                                        : <Lock className={pc.status === 'locked' ? 'text-red-400' : 'text-red-500/50'} />}
+                                                        ? <Unlock className="text-white" strokeWidth={2.5} />
+                                                        : <Lock className={pc.status === 'locked' ? 'text-[#ff3333]' : 'text-[#7d7d7d]'} strokeWidth={2.5} />}
                                             </div>
                       
                                             {/* Progress Bars for 4 questions */}
-                                            <div className="flex gap-2 mb-4">
+                                            <div className="flex gap-1 mb-4">
                                                     {[1, 2, 3, 4].map((q) => (
                                                             <div 
                                                                     key={q} 
-                                                                    className={`h-2 flex-1 rounded-full ${q <= pc.progress ? 'bg-neonBlue shadow-[0_0_8px_#00f3ff]' : 'bg-gray-800'}`}
+                                                                    className={`h-3 flex-1 border border-black ${q <= pc.progress ? 'bg-[#3C8DAB]' : 'bg-[#555]'}`}
                                                             ></div>
                                                     ))}
                                             </div>
 
                                             <div className="text-center mt-2">
                                                     {pc.status === 'solved' ? (
-                                                            <span className="text-4xl font-bold text-green-400 font-mono">{pc.assignedAlphabet}</span>
+                                                            <span className="text-4xl font-bold text-white font-mono text-shadow-[2px_2px_#000]">{pc.assignedAlphabet}</span>
                                                     ) : pc.status === 'locked' ? (
-                                                            <span className="text-xs text-red-300 uppercase tracking-widest">Locked</span>
+                                                            <span className="text-sm text-[#ff3333] font-bold uppercase tracking-widest text-shadow-[1px_1px_#3f0000]">Locked</span>
                                                     ) : (
-                                                            <span className="text-xs text-gray-500 uppercase tracking-widest">Pending</span>
+                                                            <span className="text-sm text-[#555] font-bold uppercase tracking-widest">Pending</span>
                                                     )}
                                             </div>
                                     </motion.div>
@@ -180,21 +178,21 @@ const Round1Lab = () => {
                     </div>
 
                     {/* Right: Live Leaderboard */}
-                    <div className="bg-gray-900/40 border border-gray-800 rounded-xl p-6 backdrop-blur-sm">
-                        <h2 className="text-lg font-bold mb-4">Live Leaderboard</h2>
+                    <div className="mc-panel p-6 text-black">
+                        <h2 className="text-xl font-bold mb-4 uppercase border-b-2 border-[#555] pb-2">Server Rankings</h2>
                         <div className="space-y-2">
                             {leaderboard.map((row, idx) => (
                                 <div
                                     key={row.labNumber}
-                                    className={`flex items-center justify-between p-3 rounded border ${
-                                        row.labNumber === labNumber ? 'border-neonBlue/60 bg-neonBlue/10' : 'border-gray-800 bg-black/30'
+                                    className={`flex items-center justify-between p-3 border-2 border-black ${
+                                        row.labNumber === labNumber ? 'bg-[#3C8DAB] text-white' : 'bg-[#8b8b8b] text-black'
                                     }`}
                                 >
                                     <div className="flex items-center gap-3">
-                                        <div className="w-8 text-center font-mono text-gray-400">#{idx + 1}</div>
+                                        <div className="w-8 text-center font-mono text-lg font-bold">#{idx + 1}</div>
                                         <div>
-                                            <div className="font-semibold">Lab {row.labNumber}</div>
-                                            <div className="text-xs text-gray-500">Solved PCs: {row.totalSolvedPCs}/10</div>
+                                            <div className="font-bold text-lg">Chunk {row.labNumber}</div>
+                                            <div className="text-sm opacity-80 uppercase">Unlocked: {row.totalSolvedPCs}/10</div>
                                         </div>
                                     </div>
                                     <div className="text-right">
